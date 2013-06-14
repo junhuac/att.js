@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WCG PSTN Breakout Sample</title>
+</head>
+<link rel="stylesheet" href="css/960.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../src/wildemitter.js"></script>
+<script src="../vendor/socket.io.js"></script>
+<script src="js/WCGUtil.js"></script>
+<script src="js/WCGapi.js"></script>
+<script src="../src/att.js"></script>
+<script src="../src/att.me.js"></script>
+<script src="../src/att.phonenumber.js"></script>
+<script src="../vendor/wcg/att.wcg.js"></script>
+
+<body>
+
+<div class="container_12">
+
+    <div class="grid_12">
+        <h1 class="ericssonDarkBlue">WCG PSTN Breakout</h1>
+    </div>
+
+    <div class="grid_6">
+        <form>
+
+            <div class="tooltip top">
+                <input type="button" id="login" class="nice round large yellow" value="Login"/>
+
+                <div id="tooltip" class="tooltip-inner hidden">Click to logout
+                    <div class="tooltip-angle">
+                        <div class="tooltip-angle-inner"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form>
+            <input type="text" id="number" class="round disabled" type="" value="1-804-222-1111" disabled="disabled"/>
+            <input type="button" id="call" class="nice round large lightgray" value="Call" disabled="disabled"/>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        var oauthParams = {},
+                queryString = window.parent.location.hash.substring(1),
+                regex = /([^&=]+)=([^&]*)/g,
+                m,
+                html = '';
+
+        var access_token = '';
+        var att, wcgcall;
+
+
+
+        while (m = regex.exec(queryString)) {
+            oauthParams[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        }
+
+        access_token = oauthParams['access_token'];
+        if (access_token) {
+            att = new ATT({
+                apiKey: access_token,
+                server: "alpha1"
+            });
+
+            att.on('user', function(user) {
+                $("#login").val(user.first_name);
+                $("#tooltip").removeClass("hidden");
+
+            });
+
+            //PHONE EVENTS
+            att.on('phoneReady', function() {
+                $("#number").attr("disabled", false);
+                $("#call").attr("disabled", false);
+                $("#call").removeClass("lightgray");
+                $("#call").addClass("yellow");
+            });
+
+            att.on('phoneClose', function () {
+                $("#login").val("Login");
+                $("#tooltip").addClass("hidden");
+                $("#number").attr("disabled", true);
+                $("#call").attr("disabled", true);
+                $("#call").removeClass("yellow");
+                $("#call").addClass("lightgray");
+            });
+
+            //should support phone errors as well (not only call errors)
+            att.on('error', function (eventData) {
+                console.log("ERROR");
+            });
+
+
+
+
+            //CALL EVENTS
+            att.on('calling', function (number) {
+              console.log("calling", number);
+            });
+            att.on('outgoingCall', function (call) {
+                console.log("OUTGOING CALL", call);
+                wcgcall = call;
+            });
+            att.on('incomingCall', function (call) {
+                console.log("INCOMING CALL", call);
+                wcgcall = call;
+            });
+            att.on('ring', function () {
+                console.log("ring");
+            });
+            att.on('callBegin', function (call) {
+                console.log("call begin", call);
+                $("#call").val("Hangup");
+                wcgcall = call;
+
+            });
+            att.on('callEnd', function (call) {
+                console.log("call end", call);
+                $("#call").val("Call");
+                wcgcall = call;
+            });
+
+
+
+
+            $("#login").click(function () {
+                console.log("LOGIN");
+                if ($("#login").val() != "Login") {
+                    console.log("Logging out");
+                    att.logout();
+                }
+                else {
+                    window.location.href = "https://auth.tfoundry.com/oauth/authorize?client_id=cdoso6wgycs073sk5zpmacgxuxc7mezz&response_type=token&scope=profile,webrtc&redirect_uri=http://localhost/examples/wcgdialphone.html";
+                }
+
+            });
+
+            $("#number").on('mousedown', function() {
+                if ($("#number").val() == "1-804-222-1111") {
+                    $("#number").val("");
+                }
+            });
+
+            $("#call").click(function () {
+                if ($("#call").val() == "Call") {
+                    console.log("CALL");
+                    var number =  att.phoneNumber.parse($.trim($("#number").val()));
+                    att.dial(number);
+
+                }
+                else {
+                    console.log("HANGUP");
+                    wcgcall.hangup();
+                }
+
+            });
+        }
+
+
+
+    });
+
+</script>
+</body>
+</html>
