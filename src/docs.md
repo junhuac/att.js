@@ -41,7 +41,7 @@ Common interface for making and receiving phone calls.
 
 ### Methods
 
-  - dial(string)
+  - dial(string Phone Number)
 
     Dial a number and make an outgoing call.
 
@@ -91,7 +91,7 @@ A set of helper functions for parsing and processing phone number strings.
   - parse(string)
 
     Convert a phone number that uses letters into numeric format.
-  - getCallable(string, string)
+  - getCallable(string, string countryCode)
 
     Parses a phone number string into a callable format.
 

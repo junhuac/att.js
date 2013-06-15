@@ -1,8 +1,6 @@
 (function (window, undefined) {
-
-    // Use existing underscore.js, or built-in minimal version.
-
-    this._ = _ = {
+    // create simple utils
+    var _ = {
         slice: Array.prototype.slice,
         isFunction: function (obj) {
             return Object.prototype.toString.call(obj) == '[object Function]';
@@ -26,11 +24,7 @@
                     func(obj[key], key);
                 }
             }
-        }
-    };
-
-    // Extend _ to include additional generic utilities
-    _.extend(_, {
+        },
         _uuidCounter: 0,
         uuid: function () {
             return Math.random().toString(16).substring(2) + (_._uuidCounter++).toString(16);
@@ -54,8 +48,9 @@
             window.navigator.userAgent == "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523" ||
             window.webkitPeerConnection00 && window.navigator.userAgent.indexOf('Chrome/24') !== -1;
         }
-    });
+    };
 
+    // Main ATT object constructor
     function ATT(opts) {
         WildEmitter.call(this);
 
@@ -66,11 +61,15 @@
             // apiKey: false,
             user: _.uuid(),
             log: true,
-            dependencyBaseUrl: '//js.att.io'
+            dependencyBaseUrl: '//js.att.io',
+            settings: {}
         };
 
-
+        // extend self.config with passed in options
         _.extend(self.config, opts);
+
+        // expose util methods as att._
+        self._ = _;
 
         if (self.config.log) {
             self.on('*', function (eventName, payload) {
@@ -81,17 +80,13 @@
         _.each(self.plugins, function (plugin) {
             plugin(self);
         });
-        
-        // Set a session state that can be used to identify this session and can be used to validate oauth requests
-        if (!sessionStorage.state) {
-          sessionStorage.state = _.uuid();
-          self.state =  sessionStorage.state;
-        } else {
-          self.state = sessionStorage.getItem('state');
-        }
-        
+
         self.emit('init', self);
     }
+
+    // expose util methods as ATT._ rather than a global
+    // so other plugins can use it
+    ATT._ = _;
 
     ATT.prototype = Object.create(WildEmitter.prototype, {
         constructor: {
