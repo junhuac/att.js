@@ -119,11 +119,9 @@
      * Logout from WCG
      */
     ATT.fn.logout = function () {
-      if(this.wcgBackend.wcgService) {
         console.log("Logging out");
         this.wcgBackend.wcgService.unregister();
         this.wcgBackend.wcgService = null;
-      }
     };
 
     /**
@@ -156,16 +154,17 @@
         var self = this;
 
         number = ATT.phoneNumber.parse(number);
-        //using by default webims server
-        var sipuser = "sip:" + number + "@webims.tfoundry.com";
-
+        var call;
+        //var
         if (att.config.server == 'alpha1') {
-            sipuser = "sip:" + number + "@vims1.com";
+            call = new WCGCall(self, "sip:" + number + "@vims1.com", false);
         }
         else if (att.config.server == 'webims') {
-            sipuser = "sip:" + number + "@webims.tfoundry.com";
+            call = new WCGCall(self, "sip:" + number + "@webims.tfoundry.com", false);
         }
-        var call = new WCGCall(self, sipuser, false);
+        else {
+            return;
+        }
 
         self.emit('outgoingCall', call);
         self.emit('ring');
@@ -188,7 +187,7 @@
         att.on('user', function (user) {
             console.log('Setting up WCG');
 
-            //set the default WCG values: using by default webims server
+            //set the default WCG values
             var wcgUrl = 'http://wcg-dia.tfoundry.com:38080/HaikuServlet/rest/v2/';
             var turn = 'STUN:206.18.171.164:5060';
 
