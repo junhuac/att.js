@@ -64,8 +64,13 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 			$rootScope.changePage('/answering');
 		});
 
-		att.on('error', function (eventData) {
-		    console.log("error: " + eventData);
+		att.on('phoneError', function (eventData) {
+		    console.log("phoneError: " + eventData);
+		    $rootScope.hangup();
+		});
+
+		att.on('callError', function (eventData) {
+		    console.log("callError: " + eventData);
 		    $rootScope.hangup();
 		});
 
@@ -79,7 +84,7 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 
 	$rootScope.dial = function() {
 		var pn = $scope.phoneNumber;
-		$rootScope.phoneNumber = ATT.phoneNumber.stringify(pn);		 
+		$rootScope.phoneNumber = $rootScope.att.phoneNumber.stringify(pn);		 
 		$rootScope.att.dial(pn);
 		$location.path('/calling');
 	};
