@@ -1,4 +1,14 @@
 
 <legend> Speaking with {{phoneNumber}}...</legend>
 
+<div id="localVideoFrame" ng-show="{{localVideoActive}}" class="row-fluid" style="text-align:center"> 
+	<div>
+	  <button ng-click="makeBig('localVideo')">Big</button>
+	  <button ng-click="makeSmall('localVideo')">Small</button>
+	  <button ng-click="makeNormal('localVideo')">Normal</button>
+	  <br> 
+	  <video id="localVideo" width="420"></video>
+	</div> 
+</div> 
+
 <button ng-click="hangup()" class="button large expand radius">End Call...</button>

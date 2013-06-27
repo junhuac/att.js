@@ -83,7 +83,35 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 		    $rootScope.login();
 		});
 
+		att.on('wcgLocalStream', function(stream) {
+			$("#code_localstream").css("font-weight", "bolder");
+			$("#code_localstream").css("color", "#00285F");
+			show("videoWindows");
+
+			var url = webkitURL.createObjectURL(stream);
+
+			// var localvideo = document.getElementById('selfView');
+			// localvideo.style.opacity = 1;
+			var video = $('localVideo');
+			video.src = url;
+			$rootScope.localVideoActive = true;
+		});
+
+		att.on('wcgRemoteStream', function(stream) {
+			$("#code_remotestream").css("font-weight", "bolder");
+			$("#code_remotestream").css("color", "#00285F");
+			show("videoWindows");
+
+			var url = webkitURL.createObjectURL(stream);
+
+			var remotevideo = document.getElementById('remoteView');
+			remotevideo.style.opacity = 1;
+			remotevideo.src = url;
+		});		
+
    		$rootScope.att = att;
+   		$rootScope.localVideoActive = false;
+   		$rootScope.localVideoActive = false;
 	};
 
 	$rootScope.dial = function() {
