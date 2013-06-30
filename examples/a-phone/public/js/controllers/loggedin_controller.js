@@ -83,7 +83,7 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 		    $rootScope.login();
 		});
 
-		att.on('wcgLocalStream', function(stream) {
+		att.on('localVideo', function(stream) {
 			$("#code_localstream").css("font-weight", "bolder");
 			$("#code_localstream").css("color", "#00285F");
 			show("videoWindows");
@@ -97,7 +97,7 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 			$rootScope.localVideoActive = true;
 		});
 
-		att.on('wcgRemoteStream', function(stream) {
+		att.on('remoteVideo', function(stream) {
 			$("#code_remotestream").css("font-weight", "bolder");
 			$("#code_remotestream").css("color", "#00285F");
 			show("videoWindows");
@@ -116,8 +116,9 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 
 	$rootScope.dial = function() {
 		var pn = $scope.phoneNumber;
+		var video = $scope.video || false;
 		$rootScope.phoneNumber = $rootScope.att.phoneNumber.stringify(pn);		 
-		$rootScope.att.dial(pn);
+		$rootScope.att.dial(pn, video);
 		$location.path('/calling');
 	};
 
