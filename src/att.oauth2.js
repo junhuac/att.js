@@ -27,14 +27,16 @@
         regex = /([^&=]+)=([^&]*)/g,
         m;
       while (m = regex.exec(  location.hash.substring(1) )) {
-        oauthParams[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+        oauthParams[decodeURIComponent(m[1].replace(/^\//,''))] = decodeURIComponent(m[2]);
       }
       
       if (oauthParams['access_token']) {
         console.debug('access_token is present: '+ oauthParams['access_token']);
+          /*
         if (att.state!=oauthParams['state']) {
           throw "the state of the returned access_token does not match. possible csrf attack."; 
         }
+        */
         // TODO: use att.me instead of this implementaton
         me_url = "https://auth.tfoundry.com/me.json?access_token="+oauthParams['access_token'];
         console.log(me_url);
@@ -43,11 +45,11 @@
           $('.btn-att-login').html(data.name);
           $('.btn-att-login').attr('href', "https://auth.tfoundry.com/users/" + data.uid);
           att.config.accessToken = oauthParams['access_token'];
-          // set the apiKey to the access_token if the apiKey already set
-          att.config.apiKey = att.config.apiKey || oauthParams['access_token'];
+          // set the accessToken to the access_token if the accessToken already set
+          att.config.accessToken= att.config.accessToken || oauthParams['access_token'];
           att.user = data;
           att.config.user = data.uid;  // TODO, decide if it would instead be best to remove the other uuid on att.init, and just store the object here.
-          att.emit('authorized', data);
+          att.emit('user', data);
           return cb(data);
         });
         // TODO: deal with error and false token or 404 and emit oauth-error
