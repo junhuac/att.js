@@ -316,12 +316,19 @@
             $("#code-callendevent").addClass("badge-warning");
             /////////////////////////////////////////////////
 
-            $("#form-video").hide();
-
             $("#hangup").hide();
             $("#status").show();
 
             $("#status").html("Ready to receive calls");
+
+            $("#form-video").hide();
+            var remotevideo = document.getElementById('remoteView');
+            remotevideo.style.opacity = 0;
+            remotevideo.src = "";
+
+            var localvideo = document.getElementById('localView');
+            localvideo.style.opacity = 0;
+            localvideo.src = "";
 
         });
 
