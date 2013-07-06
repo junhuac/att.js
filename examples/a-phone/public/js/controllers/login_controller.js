@@ -20,18 +20,4 @@ angular.module("app").controller('LoginController', function($scope, $rootScope,
 		}
 	};
 
-	$scope.safeApply = function(fn) {
-	  var phase = this.$root.$$phase;
-	  if(phase == '$apply' || phase == '$digest')
-	    this.$eval(fn);
-	  else
-	    this.$apply(fn);
-	};
-
-	$rootScope.changePage = function(page) {
-		$scope.safeApply( function() {
-			$location.path(page);
-		});
-	};
-
 });

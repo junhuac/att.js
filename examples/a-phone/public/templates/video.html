@@ -1,0 +1,20 @@
+ <div class="row-fluid">
+    <div id="localVideoFrame" ng-show="$rootScope.localVideoActive"> 
+      <div>
+        <button ng-click="makeBig('localVideo')">Big</button>
+        <button ng-click="makeSmall('localVideo')">Small</button>
+        <button ng-click="makeNormal('localVideo')">Normal</button>
+        <br> 
+        <video id="localVideo" width="420"></video>
+      </div> 
+    </div> 
+    <div id="remoteVideoFrame" ng-show="$rootScope.remoteVideoActive"> 
+      <div>
+        <button ng-click="makeBig('remoteVideo')">Big</button>
+        <button ng-click="makeSmall('remoteVideo')">Small</button>
+        <button ng-click="makeNormal('remoteVideo')">Normal</button>
+        <br> 
+        <video id="remoteVideo" width="420"></video>
+      </div> 
+    </div> 
+  </div> 

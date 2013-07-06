@@ -47,11 +47,9 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 
 		att.on('callEnd', function (call) {
 		    console.log("callEnd: " + ($rootScope.call == call));
-			if($rootScope.call) {
+		    if($rootScope.call) {
 				$rootScope.call.hangup();
-				delete $rootScope.call;
 			}
- 			$rootScope.changePage('/loggedin');
  			showalert("Call End", "alert-info");
 		});
 
@@ -84,9 +82,9 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 		});
 
 		att.on('localVideo', function(stream) {
-			$("#code_localstream").css("font-weight", "bolder");
-			$("#code_localstream").css("color", "#00285F");
-			show("videoWindows");
+			// $("#code_localstream").css("font-weight", "bolder");
+			// $("#code_localstream").css("color", "#00285F");
+			// show("videoWindows");
 
 			var url = webkitURL.createObjectURL(stream);
 
@@ -98,15 +96,18 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 		});
 
 		att.on('remoteVideo', function(stream) {
-			$("#code_remotestream").css("font-weight", "bolder");
-			$("#code_remotestream").css("color", "#00285F");
-			show("videoWindows");
+			// $("#code_remotestream").css("font-weight", "bolder");
+			// $("#code_remotestream").css("color", "#00285F");
+			// show("videoWindows");
 
 			var url = webkitURL.createObjectURL(stream);
 
-			var remotevideo = document.getElementById('remoteView');
-			remotevideo.style.opacity = 1;
-			remotevideo.src = url;
+			// var remotevideo = document.getElementById('remoteView');
+			// remotevideo.style.opacity = 1;
+			// remotevideo.src = url;
+			var video = $('remoteVideo');
+			video.src = url;
+			$rootScope.remoteVideoActive = true;			
 		});		
 
    		$rootScope.att = att;
@@ -115,11 +116,36 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 	};
 
 	$rootScope.dial = function() {
-		var pn = $scope.phoneNumber;
-		var video = $scope.video || false;
-		$rootScope.phoneNumber = $rootScope.att.phoneNumber.stringify(pn);		 
-		$rootScope.att.dial(pn, video);
-		$location.path('/calling');
+
+		// $rootScope.changePage('/calling');
+		navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+		if (navigator.getUserMedia) {
+			navigator.getUserMedia({audio: true, video: true}, function(stream) {
+				var url = webkitURL.createObjectURL(stream);
+				var video = $('localVideo');
+				video.src = url;
+				$rootScope.localVideoActive = true;
+			}, function(err){
+				alert(err);
+			});
+		} else {
+		  video.src = 'somevideo.webm'; // fallback.
+		}
+
+		// var pn = $scope.phoneNumber;
+		// var video = $scope.video || false;
+		// if(pn.indexOf(":") !== -1) {
+		// 	$rootScope.phoneNumber = pn;		 			
+		// } else {
+		// 	$rootScope.phoneNumber = $rootScope.att.phoneNumber.stringify(pn);		 			
+		// }
+		// // temp testing
+  // 		$rootScope.localVideoActive = true;
+  //  		$rootScope.localVideoActive = true;
+
+		// $rootScope.att.dial(pn, video);
+		$rootScope.changePage('/calling');
+		// $location.path('/calling');
 	};
 
 	$rootScope.answer = function() {
@@ -133,10 +159,29 @@ angular.module("app").controller('LoggedinController', function($scope, $rootSco
 			delete $rootScope.call;
 		}
 
+		if($rootScope.localVideoActive) {
+	   		$rootScope.localVideoActive = false;
+	   		$rootScope.localVideoActive = false;
+		}
+
 		$location.path('/loggedin');
 	};
 
 	$scope.callStatus = "Make a Call";
+
+	$rootScope.safeApply = function(fn) {
+	  var phase = this.$root.$$phase;
+	  if(phase == '$apply' || phase == '$digest')
+	    this.$eval(fn);
+	  else
+	    this.$apply(fn);
+	};
+
+	$rootScope.changePage = function(page) {
+		$rootScope.safeApply( function() {
+			$location.path(page);
+		});
+	};	
 
 	/**
 	  Bootstrap Alerts -

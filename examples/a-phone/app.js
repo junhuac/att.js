@@ -95,7 +95,10 @@ app.configure('production', function(){
 
 app.get('/', function(req, res) {
   console.log("root page");
-  if(req.user){
+  var accessToken = req.param('accessToken');
+  if(accessToken){
+    res.render("loggedin", { accessToken: accessToken });
+  } else if(req.user){
     res.render("loggedin", { accessToken: req.session.alphaAccessToken });
   } else {
     res.render('login');
