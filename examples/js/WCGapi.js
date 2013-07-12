@@ -152,7 +152,7 @@ if (typeof Logs === "undefined") {
      ms.oninvite = function(evt) {};
      ms.onstatechange = function(evt) {};
      ms.onready = function(evt) {
-	// Perform an action, such as outgoing call
+    // Perform an action, such as outgoing call
 };
      */
     MediaServices = function(gwUrl, username, authentication, services) {
@@ -397,7 +397,7 @@ if (typeof Logs === "undefined") {
         if (typeof(username) != "string" || username == "") {
             throw new Error(MediaServices.Error.INVALID_CREDENTIALS);
             //} else if (typeof(authentication) != "string" || authentication == "") {
-            //	throw new Error(MediaServices.Error.INVALID_CREDENTIALS);
+            //  throw new Error(MediaServices.Error.INVALID_CREDENTIALS);
         }
         //}
 
@@ -442,7 +442,7 @@ if (typeof Logs === "undefined") {
                 mediaType : "rtp",
                 services : _services
             };
-            //	}
+            //  }
         } else {
             body = {
                 username : username,
@@ -483,14 +483,14 @@ if (typeof Logs === "undefined") {
                     //Following code used if creating a contact list and publishing upon registration is necessary
                     /**
                      if (mediaService._isSipUser) {
-						// Create a new contact list
-						mediaService._contactList = new ContactList(mediaService);
-						mediaService._contactList._url = mediaService._gwUrl;
-						mediaService._contactList.update();
+                        // Create a new contact list
+                        mediaService._contactList = new ContactList(mediaService);
+                        mediaService._contactList._url = mediaService._gwUrl;
+                        mediaService._contactList.update();
 
-						// Publish self services
-						 mediaService._publishServices();
-					}**/
+                        // Publish self services
+                         mediaService._publishServices();
+                    }**/
 
                     logger.log("Registration successful");
 
@@ -789,11 +789,11 @@ if (typeof Logs === "undefined") {
      @example
      var avatar = document.getElementById("avatar");
      ms.setAvatar(avatar.files[0], function(evt) {
-	if (evt.success == true) {
-		// Set avatar successful
-	} else if (evt.failure == true) {
-		// Set avatar unsuccessful
-	}
+    if (evt.success == true) {
+        // Set avatar successful
+    } else if (evt.failure == true) {
+        // Set avatar unsuccessful
+    }
 });
      */
     MediaServices.prototype.setAvatar = function(avatar, callback) {
@@ -1223,7 +1223,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      ms.onready = function(evt) {
-	// Media service is ready to use.
+    // Media service is ready to use.
 };
      */
     MediaServices.prototype.onready = function(evt){}; // The MediaServices object is ready to use
@@ -1239,15 +1239,15 @@ if (typeof Logs === "undefined") {
      @example
      var ms = new MediaServices(...);
      ms.onerror = function(evt) {
-	switch (evt) {
-		case MediaServices.Error.NETWORK_FAILURE:
-			// Handle
-			break;
-		case MediaServices.Error.INVALID_CREDENTIALS:
-			// Handle
-			break;
-		// ...
-	}
+    switch (evt) {
+        case MediaServices.Error.NETWORK_FAILURE:
+            // Handle
+            break;
+        case MediaServices.Error.INVALID_CREDENTIALS:
+            // Handle
+            break;
+        // ...
+    }
 };
      */
     MediaServices.prototype.onerror = function(evt){}; // An error occurred. See the event for details.
@@ -1259,7 +1259,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      ms.onclose = function(evt) {
-	// Media service has closed properly.
+    // Media service has closed properly.
 };
      */
     MediaServices.prototype.onclose = function(evt){}; // The session has ended and this MediaServices object is no longer available to use
@@ -1273,15 +1273,15 @@ if (typeof Logs === "undefined") {
      @param {Call.State} evt.oldState Old state
      @example
      ms.onstatechange = function(evt) {
-	switch (evt.newState) {
-		case MediaServices.State.INITIALISED:
-			// Call state has changed to READY
-			break;
-		case MediaServices.State.REGISTERING:
-			// Call state has changed to ENDED
-			break;
-		// ...
-	}
+    switch (evt.newState) {
+        case MediaServices.State.INITIALISED:
+            // Call state has changed to READY
+            break;
+        case MediaServices.State.REGISTERING:
+            // Call state has changed to ENDED
+            break;
+        // ...
+    }
 };
      */
     MediaServices.prototype.onstatechange = function(evt){}; // The MediaServices object has changed state
@@ -1293,7 +1293,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      ms.onimresult = function(evt) {
-	// Media service is ready to use.
+    // Media service is ready to use.
 };
      */
     MediaServices.prototype.oninstantmessage = function(evt){}; // The MediaServices object is ready to use
@@ -1310,25 +1310,25 @@ if (typeof Logs === "undefined") {
      @param {GroupChat} evt.groupChat A GroupChat object
      @example
      ms.oninvite = function(evt) {
-	if (evt.call) {
-		// We have an incoming call
-		// This is a regular IncomingCall object that can be freely manipulated.
-		evt.call.answer();
-	} else if (evt.conf) {
-		// Invited to a conf
-		evt.conf.join();
-	} else if (evt.ftp) {
-		evt.ftp.accept();
-		// or
-		evt.ftp.cancel();
-	} else if (evt.chat) {
-		evt.chat.onbegin = function() {};
-		evt.chat.onmessage = function() {};
-	} else if (evt.groupChat) {
-		evt.groupChat.accept();
-		// or
-		evt.groupChat.decline();
-	}
+    if (evt.call) {
+        // We have an incoming call
+        // This is a regular IncomingCall object that can be freely manipulated.
+        evt.call.answer();
+    } else if (evt.conf) {
+        // Invited to a conf
+        evt.conf.join();
+    } else if (evt.ftp) {
+        evt.ftp.accept();
+        // or
+        evt.ftp.cancel();
+    } else if (evt.chat) {
+        evt.chat.onbegin = function() {};
+        evt.chat.onmessage = function() {};
+    } else if (evt.groupChat) {
+        evt.groupChat.accept();
+        // or
+        evt.groupChat.decline();
+    }
 };
      */
     MediaServices.prototype.oninvite = function(evt){}; // An invitation to a call/conference has been received
@@ -1977,17 +1977,17 @@ if (typeof Logs === "undefined") {
                             _call.state = Call.State.TRANSITION;
 
                             /**if(action == "resume"){
-						_call._pc.localStreams[0].audioTracks[0].enabled = true;
-						if(_call._pc.localStreams[0].videoTracks && _call._pc.localStreams[0].videoTracks.length > 0){
-							_call._pc.localStreams[0].videoTracks[0].enabled = true;
-						}
-					} else {
-						
-						_call._pc.localStreams[0].audioTracks[0].enabled = false;
-						if(_call._pc.localStreams[0].videoTracks && _call._pc.localStreams[0].videoTracks.length > 0){
-							_call._pc.localStreams[0].videoTracks[0].enabled = false;
-						}
-					}**/
+                        _call._pc.localStreams[0].audioTracks[0].enabled = true;
+                        if(_call._pc.localStreams[0].videoTracks && _call._pc.localStreams[0].videoTracks.length > 0){
+                            _call._pc.localStreams[0].videoTracks[0].enabled = true;
+                        }
+                    } else {
+                        
+                        _call._pc.localStreams[0].audioTracks[0].enabled = false;
+                        if(_call._pc.localStreams[0].videoTracks && _call._pc.localStreams[0].videoTracks.length > 0){
+                            _call._pc.localStreams[0].videoTracks[0].enabled = false;
+                        }
+                    }**/
 
 
                         } else {
@@ -2426,15 +2426,15 @@ if (typeof Logs === "undefined") {
      @param {Call.State} evt.oldState The old state
      @example
      call.onstatechange = function(evt) {
-	switch (evt.newState) {
-		case Call.State.READY:
-			// Call state has changed to READY
-			break;
-		case Call.State.ENDED:
-			// Call state has changed to ENDED
-			break;
-		// ...
-	}
+    switch (evt.newState) {
+        case Call.State.READY:
+            // Call state has changed to READY
+            break;
+        case Call.State.ENDED:
+            // Call state has changed to ENDED
+            break;
+        // ...
+    }
 };
      */
     Call.prototype.onstatechange = function(evt){};
@@ -2446,7 +2446,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      call.onbegin = function(evt) {
-	// Call has begun
+    // Call has begun
 };
      */
     Call.prototype.onbegin = function(evt){};
@@ -2458,7 +2458,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      call.onend = function(evt) {
-	// Call has ended
+    // Call has ended
 };
      */
     Call.prototype.onend = function(evt){};
@@ -2475,12 +2475,12 @@ if (typeof Logs === "undefined") {
      @example
      var call = service.createCall(...);
      call.onaddstream = function(evt) {
-	if (evt.call.localStreams) {
-		// Do stuff with the list of local media stream
-	}
-	if (evt.call.remoteStreams) {
-		// Do stuff with the list of remote media stream
-	}
+    if (evt.call.localStreams) {
+        // Do stuff with the list of local media stream
+    }
+    if (evt.call.remoteStreams) {
+        // Do stuff with the list of remote media stream
+    }
 };
      */
     Call.prototype.onaddstream = function(evt){};
@@ -2495,12 +2495,12 @@ if (typeof Logs === "undefined") {
      @param {MediaStream[]} evt.call.remoteStreams Remote media streams list
      @example
      call.onremovestream = function(evt) {
-	if (evt.call.localStreams) {
-		// Perform actions with the list of local media stream.
-	}
-	if (evt.call.remoteStreams) {
-		// Perform actions with the list of remote media stream.
-	}
+    if (evt.call.localStreams) {
+        // Perform actions with the list of local media stream.
+    }
+    if (evt.call.remoteStreams) {
+        // Perform actions with the list of remote media stream.
+    }
 };
      */
     Call.prototype.onremovestream = function(evt){};
@@ -2515,15 +2515,15 @@ if (typeof Logs === "undefined") {
      @param {Object} evt.target Proximal event target
      @example
      call.onerror = function(evt) {
-	switch (evt.reason) {
-		case Call.Error.NETWORK_FAILURE:
-			// Handle
-			break;
-		case Call.Error.PEER_CONNECTION:
-			// Handle
-			break;
-		// ...
-	}
+    switch (evt.reason) {
+        case Call.Error.NETWORK_FAILURE:
+            // Handle
+            break;
+        case Call.Error.PEER_CONNECTION:
+            // Handle
+            break;
+        // ...
+    }
 };
      */
     Call.prototype.onerror = function(evt){};
@@ -2605,9 +2605,9 @@ if (typeof Logs === "undefined") {
      @return void
      @example
      service.oninvite = function(evt) {
-	if (evt.call) {
-		evt.call.answer();
-	}
+    if (evt.call) {
+        evt.call.answer();
+    }
 };
      */
     IncomingCall.prototype.answer = function() {
@@ -2796,7 +2796,7 @@ if (typeof Logs === "undefined") {
      conf.end();
      */
     Conference.prototype.end = function() {
-        // TODO: remove all users from the conference before leaving		
+        // TODO: remove all users from the conference before leaving        
         this.leave();
     };
 
@@ -2809,11 +2809,11 @@ if (typeof Logs === "undefined") {
      @throws {TypeError} Invalid user
      @example
      conf.removeUser("test2", function(evt) {
-	if (evt.success) {
-		// User has been removed successfully
-	} else if (evt.failure) {
-		// Removing user has failed due to evt.reason
-	}
+    if (evt.success) {
+        // User has been removed successfully
+    } else if (evt.failure) {
+        // Removing user has failed due to evt.reason
+    }
 });
      */
     Conference.prototype.removeUser = function(user, callback) {
@@ -2876,11 +2876,11 @@ if (typeof Logs === "undefined") {
      @throws {Error} Invalid user
      @example
      conf.addUser("test2", function(evt) {
-	if (evt.success) {
-		// User has been added successfully
-	} else if (evt.failure) {
-		// Adding user has failed due to evt.reason
-	}
+    if (evt.success) {
+        // User has been added successfully
+    } else if (evt.failure) {
+        // Adding user has failed due to evt.reason
+    }
 });
      */
     Conference.prototype.addUser = function(user, callback) {
@@ -2940,11 +2940,11 @@ if (typeof Logs === "undefined") {
      @example
      var conf = service.createConference(...);
      conf.begin(function(evt) {
-	if (evt.success == true) {
-		// Conference has started successfully
-	} else if (evt.failure == true) {
-		// Conference has failed due to evt.reason
-	}
+    if (evt.success == true) {
+        // Conference has started successfully
+    } else if (evt.failure == true) {
+        // Conference has failed due to evt.reason
+    }
 )};
      */
     Conference.prototype.begin = function(callback) {
@@ -3091,15 +3091,15 @@ if (typeof Logs === "undefined") {
      @param {FileTransfer.State} evt.oldState Old state
      @example
      ftp.onstatechange = function(evt) {
-	switch (evt.newState) {
-		case FileTransfer.State.INVITATION_SENT:
-			// FileTransfer state has changed to INVITATION_SENT
-			break;
-		case FileTransfer.State.UPLOADING:
-			// FileTransfer state has changed to UPLOADING
-			break;
-		// ...
-	}
+    switch (evt.newState) {
+        case FileTransfer.State.INVITATION_SENT:
+            // FileTransfer state has changed to INVITATION_SENT
+            break;
+        case FileTransfer.State.UPLOADING:
+            // FileTransfer state has changed to UPLOADING
+            break;
+        // ...
+    }
 };
      */
     FileTransfer.prototype.onstatechange = function(evt) {};
@@ -3114,12 +3114,12 @@ if (typeof Logs === "undefined") {
      @param {Object} evt.target Proximal event target
      @example
      ftp.onerror = function(evt) {
-	switch (evt.reason) {
-		case FileTransfer.Error.NETWORK_FAILURE:
-			// Handle
-			break;
-		// ...
-	}
+    switch (evt.reason) {
+        case FileTransfer.Error.NETWORK_FAILURE:
+            // Handle
+            break;
+        // ...
+    }
 };
      */
     FileTransfer.prototype.onerror = function(evt) {};
@@ -3239,7 +3239,7 @@ if (typeof Logs === "undefined") {
      @param {Number} evt.total The total amount of bytes to be uploaded.
      @example
      ftp.onuploadprogress = function(evt) {
-	console.log(event.loaded / event.total * 100 + "%");
+    console.log(event.loaded / event.total * 100 + "%");
 };
      */
     OutgoingFileTransfer.prototype.onuploadprogress = function(evt) {};
@@ -3415,7 +3415,7 @@ if (typeof Logs === "undefined") {
      @param {Number} evt.total The total amount of bytes to download.
      @example
      ftp.ondownloadprogress = function(evt) {
-	console.log(event.loaded / event.total * 100 + "%");
+    console.log(event.loaded / event.total * 100 + "%");
 };
      */
     IncomingFileTransfer.prototype.ondownloadprogress = function(evt) {};
@@ -3430,7 +3430,7 @@ if (typeof Logs === "undefined") {
      @param {String} evt.ftp.data Data URI of the file in base 64.
      @example
      call.onreceivedfile = function(evt) {
-	// Do stuff with evt.ftp.data
+    // Do stuff with evt.ftp.data
 };
      */
     IncomingFileTransfer.prototype.onreceivedfile = function(evt) {};
@@ -3445,9 +3445,9 @@ if (typeof Logs === "undefined") {
      @throws {Error} No active file transfer session
      @example
      ms.oninvite = function(evt) {
-	if (evt.ftp) {
-		evt.ftp.accept();
-	}
+    if (evt.ftp) {
+        evt.ftp.accept();
+    }
 };
      */
     IncomingFileTransfer.prototype.accept = function() {
@@ -3740,7 +3740,7 @@ if (typeof Logs === "undefined") {
      @throws {Error} Unable to send composing event until the chat session is active
      @example
      object.onkeypress = function() {
-	chat.typing();
+    chat.typing();
 };
      */
     Chat.prototype.typing = function() {
@@ -3973,15 +3973,15 @@ if (typeof Logs === "undefined") {
      @param {Chat.State} evt.oldState Old state.
      @example
      chat.onstatechange = function(evt) {
-	switch (evt.newState) {
-		case Chat.State.ACTIVE:
-			// Chat state has changed to ACTIVE
-			break;
-		case Chat.State.ERROR:
-			// Chat state has changed to ERROR
-			break;
-		// ...
-	}
+    switch (evt.newState) {
+        case Chat.State.ACTIVE:
+            // Chat state has changed to ACTIVE
+            break;
+        case Chat.State.ERROR:
+            // Chat state has changed to ERROR
+            break;
+        // ...
+    }
 };
      */
     Chat.prototype.onstatechange = function(evt) {};
@@ -3993,7 +3993,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      chat.onbegin = function(evt) {
-	// Chat has begun
+    // Chat has begun
 };
      */
     Chat.prototype.onbegin = function(evt) {};
@@ -4010,11 +4010,11 @@ if (typeof Logs === "undefined") {
      @param {String} [evt.size] Media message size in bytes
      @example
      chat.onmessage = function(evt) {
-	if (evt.message) {
-		// Chat message
-	} else if (evt.media) {
-		// Media message
-	}
+    if (evt.message) {
+        // Chat message
+    } else if (evt.media) {
+        // Media message
+    }
 };
      */
     Chat.prototype.onmessage = function(evt) {};
@@ -4037,11 +4037,11 @@ if (typeof Logs === "undefined") {
      @param {Number} evt.refresh The timer, in seconds, associated to this is-composing event. For example, an is-composing icon could be displayed for evt.refresh amount of time.
      @example
      chat.oncomposing = function(evt) {
-	if (evt.state == "active") {
-		// User 'evt.from' is currently typing
-	} else if (evt.state == "idle") {
-		// User 'evt.from' has stopped typing
-	}
+    if (evt.state == "active") {
+        // User 'evt.from' is currently typing
+    } else if (evt.state == "idle") {
+        // User 'evt.from' has stopped typing
+    }
 };
      */
     Chat.prototype.oncomposing = function(evt) {};
@@ -4056,15 +4056,15 @@ if (typeof Logs === "undefined") {
      @param {Object} evt.target Proximal event target.
      @example
      chat.onerror = function(evt) {
-	switch (evt.reason) {
-		case Chat.Error.NETWORK_FAILURE:
-			// Handle
-			break;
-		case Chat.Error.INVALID_USER:
-			// Handle
-			break;
-		// ...
-	}
+    switch (evt.reason) {
+        case Chat.Error.NETWORK_FAILURE:
+            // Handle
+            break;
+        case Chat.Error.INVALID_USER:
+            // Handle
+            break;
+        // ...
+    }
 };
      */
     Chat.prototype.onerror = function(evt) {};
@@ -4403,9 +4403,9 @@ if (typeof Logs === "undefined") {
      @throws {Error} Unable to join group chat with invalid ID
      @example
      service.oninvite = function(evt) {
-	if (evt.groupChat) {
-		evt.groupChat.accept();
-	}
+    if (evt.groupChat) {
+        evt.groupChat.accept();
+    }
 };
      */
     GroupChat.prototype.accept = function() {
@@ -4458,9 +4458,9 @@ if (typeof Logs === "undefined") {
      @throws {Error} Failed to decline invitation to group chat, no conferenceID
      @example
      service.oninvite = function(evt) {
-	if (evt.groupChat) {
-		evt.groupChat.decline();
-	}
+    if (evt.groupChat) {
+        evt.groupChat.decline();
+    }
 };
      */
     GroupChat.prototype.decline = function() {
@@ -4515,7 +4515,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      groupchat.onend = function(evt) {
-	// GroupChat has ended
+    // GroupChat has ended
 };
      */
     GroupChat.prototype.onend = function(evt) {};
@@ -4530,10 +4530,10 @@ if (typeof Logs === "undefined") {
      @param {String} evt.members.status Status of the member ("invited", "connected", "disconnected")
      @example
      groupchat.onupdate = function(evt) {
-	// A crude example...
-	if (evt.members[0].status == "disconnected") {
-		alert(evt.members[0].entity + "has disconnected from the chat");
-	}
+    // A crude example...
+    if (evt.members[0].status == "disconnected") {
+        alert(evt.members[0].entity + "has disconnected from the chat");
+    }
 }
      */
     GroupChat.prototype.onupdate = function(evt) {};
@@ -5123,15 +5123,15 @@ if (typeof Logs === "undefined") {
      @param {Chat.State} evt.oldState Old state.
      @example
      contactList.onstatechange = function(evt) {
-	switch (evt.newState) {
-		case ContactList.State.READY:
-			// ContactList state has changed to READY
-			break;
-		case ContactList.State.ERROR:
-			// ContactList state has changed to ERROR
-			break;
-		// ...
-	}
+    switch (evt.newState) {
+        case ContactList.State.READY:
+            // ContactList state has changed to READY
+            break;
+        case ContactList.State.ERROR:
+            // ContactList state has changed to ERROR
+            break;
+        // ...
+    }
 };
      */
     ContactList.prototype.onstatechange = function(evt) {};
@@ -5144,9 +5144,9 @@ if (typeof Logs === "undefined") {
      @param {ContactList} evt.contactList The ContactList object
      @example
      contactList.onready = function(evt) {
-	if (evt.contactList) {
-		// Do stuff with the ContactList and Contacts
-	}
+    if (evt.contactList) {
+        // Do stuff with the ContactList and Contacts
+    }
 };
      */
     ContactList.prototype.onready = function(evt) {};
@@ -5159,9 +5159,9 @@ if (typeof Logs === "undefined") {
      @param {Array} evt.contacts An array of Contact objects
      @example
      contactList.onpresenceinvite = function(evt) {
-	var contact = evt.contacts[0];
-	contactList.add(contact);
-	contact.follow();
+    var contact = evt.contacts[0];
+    contactList.add(contact);
+    contact.follow();
 };
      */
     ContactList.prototype.onpresenceinvite = function(evt) {};
@@ -5192,33 +5192,33 @@ if (typeof Logs === "undefined") {
      @property {Object} avatar A base 64 encoded data uri of the contact's avatar
      @example
      var info = {
-	"name":
-		{"given": "givenName",
-		"family": "familyName"},
-	"addresses":[
-		{
-		"type": "HOME",
-			"street": "a street",
-			"locality": "a town",
-			"region": "a region",
-			"postalcode": "a postal code",
-			"country": "a country"}],
-	"numbers": [
-		{
-		"number": "1",
-		"type": "MOBILE_HOME",
-		"primary": "false"},
-		{
-		"number": "3",
-		"type": "MOBILE_WORK",
-		"primary": "true"},
-		{
-		"number": "2",
-		"type": "HOME",
-		"primary": "false"}],
-	"emails": [
-		{
-		"email": "1@domain.com",
+    "name":
+        {"given": "givenName",
+        "family": "familyName"},
+    "addresses":[
+        {
+        "type": "HOME",
+            "street": "a street",
+            "locality": "a town",
+            "region": "a region",
+            "postalcode": "a postal code",
+            "country": "a country"}],
+    "numbers": [
+        {
+        "number": "1",
+        "type": "MOBILE_HOME",
+        "primary": "false"},
+        {
+        "number": "3",
+        "type": "MOBILE_WORK",
+        "primary": "true"},
+        {
+        "number": "2",
+        "type": "HOME",
+        "primary": "false"}],
+    "emails": [
+        {
+        "email": "1@domain.com",
      "type": "WORK",
      "primary": "true"}],
      "note":"a note"
@@ -5545,9 +5545,9 @@ if (typeof Logs === "undefined") {
      @throws {Error} Unable to perform action to self
      @example
      contactList.onpresenceinvite = function(evt) {
-	var contact = evt.contacts[0];
-	contactList.add(contact);
-	contact.block();
+    var contact = evt.contacts[0];
+    contactList.add(contact);
+    contact.block();
 };
      */
     Contact.prototype.block = function() {
@@ -5596,9 +5596,9 @@ if (typeof Logs === "undefined") {
      @return void
      @example
      contact.getAvatar(function(evt) {
-	if (evt.success) {
-		// Update the avatar of this contact
-	}
+    if (evt.success) {
+        // Update the avatar of this contact
+    }
 });
      */
     Contact.prototype.getAvatar = function(callback) {
@@ -5663,7 +5663,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      contact.onupdate = function(evt) {
-	// The contact has been updated
+    // The contact has been updated
 };
      */
     Contact.prototype.onupdate = function(evt) {};
@@ -5675,7 +5675,7 @@ if (typeof Logs === "undefined") {
      @param evt
      @example
      contact.onupdating = function(evt) {
-	// The contact is being updated
+    // The contact is being updated
 };
      */
     Contact.prototype.onupdating = function(evt) {};
@@ -5944,7 +5944,7 @@ if (typeof Logs === "undefined") {
                                         currentCall= _ms._call;
                                     } else if (audioVideoIndex != -1) {
                                         var callId= tokens[audioVideoIndex + 1];
-                                        if(_ms._call._callID == null || _ms._call._callID == callId)	{
+                                        if(_ms._call._callID == null || _ms._call._callID == callId)    {
                                             currentCall= _ms._call;
                                         }
                                         else if(_ms._transferTargetCall != null && _ms._transferTargetCall._callID == callId){
@@ -6031,7 +6031,7 @@ if (typeof Logs === "undefined") {
                                     // Audio video call terminated
                                     var audioVideoIndex = tokens.indexOf("audiovideo");
                                     var callId= tokens[audioVideoIndex + 1];
-                                    if(_ms._call._callID == callId)	{
+                                    if(_ms._call._callID == callId) {
                                         currentCall= _ms._call;
                                     }
                                     else {
@@ -6146,7 +6146,7 @@ if (typeof Logs === "undefined") {
                                     console.log("transfer-initiated");
                                 } else if (state.toLowerCase() == "transfer-terminated") {
                                     console.log("transfer-terminated");
-                                    //Wait for the other leg session-terminated event									
+                                    //Wait for the other leg session-terminated event                                   
                                 } else {
                                     // Unhandled event
                                     logger.log("Unhandled audio video channel event: " + type + " " + state);
@@ -6234,7 +6234,7 @@ if (typeof Logs === "undefined") {
                                     _ms._contactList._parseAddressBook(contacts);
                                 }
                             } else if (type == "message") {
-                                var	body = eventObject.body,
+                                var body = eventObject.body,
                                 //contentType = eventObject.contentType,
                                     typeMessage = eventObject.type;
                                 var msg = {
