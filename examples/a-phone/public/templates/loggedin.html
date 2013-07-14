@@ -1,7 +1,7 @@
 <div id="alert_placeholder"></div>
 <form  ng-submit="dial()" class="form-horizontal">
   <fieldset>
-    <legend> {{ callStatus }}</legend>
+    <legend>{{ callStatus }}</legend>
 
     <label for="Number to Dial">To </label>
     <input type="text" id='number_to_dial' name="number_to_dial" value="1-800-444-4444" class="input-block-level" placeholder="1-800-444-4444" autofocus ng-model="phoneNumber" required/>
@@ -15,3 +15,28 @@
 
   </fieldset>
 </form>
+<div class="row-fluid">
+	<div id="localVideoFrame" class="video-container" ng-show="localVideoActive"> 
+	  <div>
+	    <button ng-click="makeSmall('localVideo')">Small</button>
+	    <button ng-click="makeNormal('localVideo')">Normal</button>
+	    <button ng-click="makeBig('localVideo')">Big</button>
+      </div>
+      <div> 
+	    <video id="localVideo" width="420" autoplay></video>
+	  </div> 
+	</div> 
+	<div id="remoteVideoFrame" class="video-container" ng-show="remoteVideoActive"> 
+	  <div>
+	    <button ng-click="makeSmall('remoteVideo')">Small</button>
+	    <button ng-click="makeNormal('remoteVideo')">Normal</button>
+	    <button ng-click="makeBig('remoteVideo')">Big</button>
+      </div>
+      <div> 
+	    <video id="remoteVideo" width="420"></video>
+	  </div> 
+	</div> 
+</div> 
+
+<button ng-click="hangup()" class="button large expand radius">Hangup</button>
+

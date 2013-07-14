@@ -1,0 +1,9 @@
+.video-container {
+  margin: 2em auto 0;
+  padding: 2em;
+  background: white;
+}
+
+#localVideo {
+  -webkit-filter: sepia(1);
+}
