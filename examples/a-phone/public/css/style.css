@@ -7,3 +7,12 @@
 #localVideo {
   -webkit-filter: sepia(1);
 }
+
+.videoStream {
+  max-width: 100%;
+}
+
+/*.row-fluid{ 
+  min-height:800px; 
+}
+*/
