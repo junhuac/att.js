@@ -62,7 +62,33 @@
        </div>
      </div>
 
-     <div class="container-fluid" ng-view>
+     <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span3" ng-show="loggedIn">
+            <div class="well sidebar-nav">
+              <ul class="nav nav-list">
+                <li class="nav-header">Sidebar</li>
+                <li class="active"><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li class="nav-header">Sidebar</li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li class="nav-header">Sidebar</li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+              </ul>
+            </div><!--/.well -->
+          </div><!--/span-->      
+          <div class="span9" ng-view>
+          </div>
+        </div>
      </div> <!-- /container -->
 
     <!-- Le javascript
@@ -98,3 +124,4 @@
     <script src="/js/att.js/vendor/WCGapi.js"></script>
     <script src="/js/att.js/vendor/att.wcg.js"></script>
 
+    <script src="http://simplewebrtc.com/latest.js"></script>

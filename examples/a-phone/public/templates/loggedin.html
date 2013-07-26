@@ -1,31 +1,44 @@
+
 <div id="alert_placeholder">
 </div>
-<div class="row-fluid">
-	<div class="span4 well" ng-repeat="call in calls">
-		<legend>{{ call.slogan }}</legend>
+<div class="span3 well" ng-repeat="call in calls">
+	<legend>{{ call.slogan }}</legend>
 
-		<div ng-show="call.makeCall">
-			<label for="Number to Dial">To </label>
-			<input type="text" name="number_to_dial" value="1-214-717-8973" class="input-block-level" autofocus ng-model="call.leg" />
-			<label class="checkbox">
-<!-- 				<input ng-click="addVideo({{$index}})" ng-model="video" type="checkbox"> Video
- -->				<input ng-model="call.video" type="checkbox"> Video
-			</label>
+	<div ng-show="call.makeCall">
+		<label for="Number to Dial">Phone Number, SIP Address, Talky.io room</label>
+		<input type="text" name="number_to_dial" value="1-214-717-8973" class="input-block-level" autofocus ng-model="call.remoteAddress" />
+		<label class="checkbox">
+			<input ng-model="call.video" type="checkbox"> Video
+		</label>
+		<label class="checkbox">
+			<input ng-model="call.talkyAddress" type="checkbox"> <a href="https://talky.io" target="talky.io">http://talky.io</a>
+		</label>
 
-			<button type="button" class="btn" ng-click="dial({{$index}})" ng-show="call.dial">Call</button>
-			<button type="button" class="btn" ng-click="hangup({{$index}})" ng-show="call.hangup">Hangup</button>
-		</div>
-		<div class="row-fluid">
-			<div id="videoFrame-{{$index}}" class="video-container text-center" ng-show="call.videoActive"> 
-				<p>  
-					<button class="btn" ng-click="makeSmall('video-{{$index}}')">Small</button>
-					<button class="btn" ng-click="makeNormal('video-{{$index}}')">Normal</button>
-					<button class="btn" ng-click="makeBig('video-{{$index}}')">Big</button>
-				</p>
-				<div> 
-					<video id="video-{{$index}}" class="videoStream" width="50%" autoplay></video>
-				</div> 
+		<button type="button" class="btn" ng-click="dial({{$index}})" ng-show="call.dial">Call</button>
+		<button type="button" class="btn" ng-click="hangup({{$index}})" ng-show="call.hangup">Hangup</button>
+		<button type="button" class="btn" ng-click="answer({{$index}})" ng-show="call.answer">Answer</button>
+		<button type="button" class="btn" ng-click="endTalky({{$index}})" ng-show="call.talkyExit">Exit Room</button>
+	</div>
+	<div class="row-fluid">
+		<div id="localVideoFrame-{{$index}}" class="video-container text-center" ng-show="call.localVideoActive"> 
+			<p>  
+				<button class="btn" ng-click="makeSmall('localVideo-{{$index}}')">Small</button>
+				<button class="btn" ng-click="makeNormal('localVideo-{{$index}}')">Normal</button>
+				<button class="btn" ng-click="makeBig('localVideo-{{$index}}')">Big</button>
+			</p>
+			<div> 
+				<video id="localVideo-{{$index}}" class="videoStream" width="50%" autoplay></video>
+			</div> 
+		</div> 
+		<div id="remoteVideoFrame-{{$index}}" class="video-container text-center"  ng-show="call.remoteVideoActive"> 
+			<p>  
+				<button class="btn" ng-click="makeSmall('remoteVideo-{{$index}}')">Small</button>
+				<button class="btn" ng-click="makeNormal('remoteVideo-{{$index}}')">Normal</button>
+				<button class="btn" ng-click="makeBig('remoteVideo-{{$index}}')">Big</button>
+			</p>
+			<div> 
+				<video id="remoteVideo-{{$index}}" class="videoStream" width="50%" autoplay></video>
 			</div> 
 		</div> 
 	</div> 
-</div>
+</div> 
